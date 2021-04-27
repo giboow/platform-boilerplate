@@ -10,7 +10,8 @@ const routes: Routes = [
     path: "admin", children: [
       {path: "userlist", component: UserlistComponent}
     ]
-  }
+  },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
