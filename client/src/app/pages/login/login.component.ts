@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  userName: string;
+
+  password: string;
+
+  msgs: any[];
+
   constructor() { }
 
   ngOnInit(): void {
+    this.msgs = [{ severity: 'info', detail: 'UserName: admin' }, { severity: 'info', detail: 'Password: password' }];
+  }
+
+  onClickLogin(): void{
+    console.log(1);
   }
 
 }
