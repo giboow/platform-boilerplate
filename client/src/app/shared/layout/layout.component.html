@@ -1,3 +1,8 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
+<div class="main-content columns is-fullheight">
+  <app-menu class="column is-2 is-narrow-mobile is-fullheight is-hidden-mobile"></app-menu>
+  <div class="container column is-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 <app-footer></app-footer>

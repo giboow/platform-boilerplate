@@ -1,8 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-//@import '~bootstrap/scss/bootstrap';
-
-.full-width {
-  width: 100%;
-}
+@import '~bulma';
+@import '~bulma-extensions/bulma-switch/src/sass/index';
+@import '~bulma-extensions/bulma-tooltip/src/sass/index';
+@import '~bulma-extensions/bulma-calendar/src/sass/index';
