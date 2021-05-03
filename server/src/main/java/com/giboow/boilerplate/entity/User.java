@@ -1,5 +1,7 @@
 package com.giboow.boilerplate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.giboow.boilerplate.entity.user.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,26 +25,27 @@ public class User implements UserDetails, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     /**
-     * User username, use as login
+     * User email, use as login
+     */
+    @NonNull
+    @Email
+    @NotBlank
+    @Column(unique = true)
+    private String email;
+
+    /**
+     * User password
      */
     @NonNull
     @NotBlank
-    @Column(unique = true)
-    private String username;
-
-    @NonNull
-    @NotBlank
+    @JsonIgnore
     private String password;
 
     @NonNull
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @NonNull
-    @Email
-    @NotBlank
-    private String email;
 
     @NonNull
     @NotBlank
@@ -66,7 +69,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
@@ -87,5 +90,14 @@ public class User implements UserDetails, Serializable {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    /**
+     * Allow to set password
+     * @param password
+     */
+    @JsonProperty("password")
+    public void setPassword(@NonNull String password) {
+        this.password = password;
     }
 }
