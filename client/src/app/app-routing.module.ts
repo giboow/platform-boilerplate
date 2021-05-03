@@ -5,14 +5,14 @@ import {LayoutComponent} from './shared/layout/layout.component';
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('src/app/pages/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('src/app/features/login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'main',
     component: LayoutComponent,
     children: [{
       path: 'dashboard',
-      loadChildren: () => import('src/app/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+      loadChildren: () => import('src/app/features/dashboard/dashboard.module').then(m => m.DashboardModule),
 //      canActivate: [AuthGuard]
     }]
   },
