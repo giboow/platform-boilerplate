@@ -15,13 +15,11 @@ public class UserService {
 
     /**
      * Create user and then return the persisted object
-     * @param user
-     * @return
+     * @param user User to be created
+     * @return User persited
      */
     @Transactional
     public User createUser(User user) {
-//        userRepository.save(user);
-
-        return user;
+        return userRepository.save(user);
     }
 }

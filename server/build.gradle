@@ -32,10 +32,9 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.amqp:spring-rabbit-test'
-
+    testImplementation 'org.springframework.security:spring-security-test'
     implementation 'com.auth0:java-jwt:3.15.0'
 }
-
 
 test {
     useJUnitPlatform()

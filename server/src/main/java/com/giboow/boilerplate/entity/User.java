@@ -3,22 +3,27 @@ package com.giboow.boilerplate.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.giboow.boilerplate.entity.user.Role;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Locale;
 
 @Entity
 @Data
 @Table(name = "\"user\"")
 @NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails, Serializable {
 
     @Id
@@ -59,7 +64,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Arrays.asList(new SimpleGrantedAuthority(role.name().toUpperCase()));
     }
 
     @Override
@@ -79,7 +84,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return active;
     }
 
     @Override
@@ -89,7 +94,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return active;
     }
 
     /**

@@ -5,12 +5,10 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.beans.ConstructorProperties;
 
 
 @Configuration
@@ -50,7 +48,7 @@ public class AppSercurityConfig {
     protected String tokenPrefix = "Bearer ";
 
 
-    @Bean
+    @Bean("customBCryptPasswordEncoder")
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
