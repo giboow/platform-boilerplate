@@ -17,13 +17,13 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Locale;
 
 @Entity
 @Data
 @Table(name = "\"user\"")
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User implements UserDetails, Serializable {
 
     @Id
@@ -43,8 +43,6 @@ public class User implements UserDetails, Serializable {
     /**
      * User password
      */
-    @NonNull
-    @NotBlank
     @JsonIgnore
     private String password;
 
@@ -62,36 +60,43 @@ public class User implements UserDetails, Serializable {
 
     private boolean active = true;
 
+    @JsonIgnore()
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority(role.name().toUpperCase()));
     }
 
+    @JsonIgnore()
     @Override
     public String getPassword() {
         return password;
     }
 
+    @JsonIgnore()
     @Override
     public String getUsername() {
         return email;
     }
 
+    @JsonIgnore()
     @Override
     public boolean isAccountNonExpired() {
         return false;
     }
 
+    @JsonIgnore()
     @Override
     public boolean isAccountNonLocked() {
         return active;
     }
 
+    @JsonIgnore()
     @Override
     public boolean isCredentialsNonExpired() {
         return false;
     }
 
+    @JsonIgnore()
     @Override
     public boolean isEnabled() {
         return active;
@@ -105,4 +110,5 @@ public class User implements UserDetails, Serializable {
     public void setPassword(@NonNull String password) {
         this.password = password;
     }
+
 }

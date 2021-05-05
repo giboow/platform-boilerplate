@@ -1,8 +1,11 @@
 package com.giboow.boilerplate.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.giboow.boilerplate.config.AppSercurityConfig;
+import com.giboow.boilerplate.config.SpringSecurityWebAuxTestConfig;
 import com.giboow.boilerplate.entity.User;
 import com.giboow.boilerplate.entity.user.Role;
+import com.giboow.boilerplate.security.WebSecurity;
 import com.giboow.boilerplate.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
@@ -22,8 +26,11 @@ import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
+//@Import(SpringSecurityWebAuxTestConfig.class)
+@Import({SpringSecurityWebAuxTestConfig.class, WebSecurity.class, AppSercurityConfig.class})
 public class UserControllerWebTest {
 
     @Autowired

@@ -33,12 +33,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         AppSercurityConfig securityConfig = getApplicationContext().getBean(AppSercurityConfig.class);
 
         http
+                .csrf().disable()
                 .cors().and().authorizeRequests()
                 .antMatchers(HttpMethod.POST, securityConfig.getSignUpUrl()).permitAll()
                 .antMatchers(HttpMethod.POST, securityConfig.getSignInUrl()).permitAll()
                  .anyRequest().authenticated()
                 .and()
-                .csrf().disable()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), securityConfig))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), securityConfig))
                 // this disables session creation on Spring Security
