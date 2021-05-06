@@ -1,0 +1,49 @@
+<section class="hero is-primary is-fullheight">
+  <div class="hero-body">
+    <div class="container is-fullwidth">
+      <div class="columns is-centered">
+        <div class="column is-2  is-mobile has-text-centered">
+          <img src="favicon.ico"  al="Your logo here"/>
+        </div>
+      </div>
+      <div class="columns is-centered is-mobile">
+        <div class="column is-10-mobile is-5-tablet is-4-desktop is-3-widescreen ">
+          <form class="box" (ngSubmit)="onSubmitForm()">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control has-icons-left">
+                <input type="email" placeholder="Your username" class="input" name="username" required
+                       [(ngModel)]="userName">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control has-icons-left">
+                <input type="password" placeholder="*******" class="input" name="password" required
+                       [(ngModel)]="password">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            <!--            <div class="field">-->
+            <!--              <label class="checkbox">-->
+            <!--                <input type="checkbox">-->
+            <!--                Remember me-->
+            <!--              </label>-->
+            <!--            </div>-->
+            <div class="field">
+              <button class="button is-success is-fullwidth">
+                Login
+              </button>
+              <nwb-spinner></nwb-spinner>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

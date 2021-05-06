@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+
+// Custom colors theming
+
+
+
+@import '~bulma';
+@import '~bulma-extensions/bulma-switch/src/sass/index';
+@import '~bulma-extensions/bulma-tooltip/src/sass/index';
+@import '~bulma-extensions/bulma-calendar/src/sass/index';
+
