@@ -6,6 +6,7 @@ import com.giboow.boilerplate.config.SpringSecurityWebAuxTestConfig;
 import com.giboow.boilerplate.entity.User;
 import com.giboow.boilerplate.entity.user.Role;
 import com.giboow.boilerplate.security.WebSecurity;
+import com.giboow.boilerplate.service.AuthService;
 import com.giboow.boilerplate.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
 //@Import(SpringSecurityWebAuxTestConfig.class)
-@Import({SpringSecurityWebAuxTestConfig.class, WebSecurity.class, AppSercurityConfig.class})
+@Import({SpringSecurityWebAuxTestConfig.class, WebSecurity.class, AppSercurityConfig.class, AuthService.class})
 @ActiveProfiles("test")
 public class UserControllerWebTest {
 

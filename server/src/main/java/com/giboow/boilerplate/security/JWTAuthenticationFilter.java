@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.giboow.boilerplate.config.AppSercurityConfig;
 import com.giboow.boilerplate.entity.User;
+import com.giboow.boilerplate.service.AuthService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,12 +21,12 @@ import java.util.Date;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private AuthenticationManager authenticationManager;
 
     private AppSercurityConfig sercurityConfig;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, AppSercurityConfig sercurityConfig) {
-        this.authenticationManager = authenticationManager;
+    private AuthService authService;
+
+    public JWTAuthenticationFilter(AuthService authService, AppSercurityConfig sercurityConfig) {
         this.sercurityConfig = sercurityConfig;
         setFilterProcessesUrl(sercurityConfig.getSignInUrl());
     }
@@ -37,12 +38,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             User creds = new ObjectMapper()
                     .readValue(req.getInputStream(), User.class);
 
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            creds.getUsername(),
-                            creds.getPassword(),
-                            new ArrayList<>())
-            );
+            return authService.authenticate(creds.getUsername(), creds.getPassword());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -53,10 +49,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException {
-        String token = JWT.create()
-                .withSubject(((User) auth.getPrincipal()).getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + (sercurityConfig.getExpirationTime() * 1000)))
-                .sign(Algorithm.HMAC512(sercurityConfig.getSecret().getBytes()));
+
+        String token = authService.generateToken((User) auth.getPrincipal());
 
         String body = ((User) auth.getPrincipal()).getUsername() + " " + token;
 
