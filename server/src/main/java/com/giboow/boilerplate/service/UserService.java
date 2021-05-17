@@ -52,7 +52,7 @@ public class UserService {
 
         // Test if there is another user with same password...
         // If the user exists and password are equals, then connect
-        Optional<User> userOptional = userRepository.finByEmail(subscription.getEmail());
+        Optional<User> userOptional = userRepository.findByEmail(subscription.getEmail());
         if(userOptional.isPresent()) {
             User userExist = userOptional.get();
             if (userExist.getPassword().equals(passwordHash)) {

@@ -33,8 +33,15 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.amqp:spring-rabbit-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // Auth
     implementation 'com.auth0:java-jwt:3.15.0'
     implementation group: 'org.passay', name: 'passay', version: '1.6.0'
+
+    // Doc
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.8'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-security', version: '1.5.8'
+
 }
 
 test {

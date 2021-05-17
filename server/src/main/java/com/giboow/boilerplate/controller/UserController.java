@@ -3,6 +3,8 @@ package com.giboow.boilerplate.controller;
 import com.giboow.boilerplate.dto.UserSubscriptionDTO;
 import com.giboow.boilerplate.entity.User;
 import com.giboow.boilerplate.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,15 +20,19 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value = "/subscribe", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    /**
+     * Add user
+     *
+     * @param user The user to be created
+     * @return
+     */
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public User subscribe(@Validated @RequestBody UserSubscriptionDTO subscription) {
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
+    public User createUser(@Validated @RequestBody User user) {
+        User persist = userService.createUser(user);
 
-        userService.register(subscription);
-
-
-        return null;
+        return persist;
     }
 
 
@@ -38,22 +44,8 @@ public class UserController {
      */
     @GetMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     public User me(@AuthenticationPrincipal User user) {
         return user;
     }
-
-    /**
-     * Add user
-     *
-     * @param user The user to be created
-     * @return
-     */
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public User createUser(@Validated @RequestBody User user) {
-        User persist = userService.createUser(user);
-
-        return persist;
-    }
-
 }
