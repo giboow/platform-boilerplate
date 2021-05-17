@@ -64,10 +64,10 @@ public class UserServiceTests {
                 "user", "basic"
         );
 
-        when(repository.finByEmail(any(String.class))).thenReturn(Optional.empty());
+        when(repository.findByEmail(any(String.class))).thenReturn(Optional.empty());
 
         User persisted = userService.register(subscriptionDTO);
-        verify(repository, times(1)).finByEmail(any(String.class));
+        verify(repository, times(1)).findByEmail(any(String.class));
         verify(repository, times(1)).save(any(User.class));
 
         assertNotNull(persisted);
