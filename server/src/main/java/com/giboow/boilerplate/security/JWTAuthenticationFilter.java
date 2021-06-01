@@ -28,6 +28,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JWTAuthenticationFilter(AuthService authService, AppSercurityConfig sercurityConfig) {
         this.sercurityConfig = sercurityConfig;
+        this.authService = authService;
         setFilterProcessesUrl(sercurityConfig.getSignInUrl());
     }
 
