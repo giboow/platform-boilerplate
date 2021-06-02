@@ -1,10 +1,11 @@
 name: Sonarqube
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    types: [opened, synchronize, reopened]
+#on:
+#  push:
+#    branches:
+#      - master
+#  pull_request:
+#    types: [opened, synchronize, reopened]
+on: [push]
 defaults:
   run:
     working-directory: ./server
